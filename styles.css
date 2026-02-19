@@ -1,29 +1,252 @@
 :root{
-    --bg:#f6f8fb;
-    --card:#ffffff;
-    --accent:#2b7a78;
-    --muted:#6b7280;
-    --max-width:1100px;
+   /* Dynamic theme variables (hue-based) */
+   --h: 178; /* hue */
+   --s: 55;  /* saturation % */
+   --l: 36;  /* lightness % */
+   --card:#ffffff;
+   --accent: hsl(var(--h), var(--s)%, var(--l)%);
+   --muted:#618e92;
+   --max-width:1100px;
 }
 *{box-sizing:border-box}
-body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#111}
+body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; min-height:100vh; color:#111;
+   /* animated 3-color background (updated) */
+   background: linear-gradient(-45deg, #4ca1af, #134e5e, #71b280);
+   background-size: 400% 400%;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   animation: gradientMove 10s ease infinite;
+}
+
+
+
+
+/* =========================
+   1. Variables & Base
+   ========================= */
+
+/* =========================
+   2. Layout Containers
+   ========================= */
 .container{max-width:var(--max-width); margin:0 auto; padding:1rem}
-.site-header{background:linear-gradient(90deg,#fff 0%, #f9fbfc 100%); border-bottom:1px solid #e6eef2}
+
+/* =========================
+   3. Header & Navigation
+   ========================= */
+.site-header{background-color:rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem}
-.brand{margin:0;font-size:1.25rem;color:var(--accent)}
+.brand{margin:0;font-size:1.25rem;color:var(--accent);font-weight:700;letter-spacing:-0.5px}
 .main-nav{display:flex;gap:0.5rem}
-.main-nav a{color:var(--muted);text-decoration:none;padding:0.5rem;border-radius:6px}
-.main-nav a:hover{background:#eef6f6;color:var(--accent)}
-.menu-toggle{display:none;background:transparent;border:0;font-size:1.25rem;align-items:center;justify-content:center;padding:0.25rem 0.5rem;border-radius:6px}
-.hero{padding:3rem 0;background:linear-gradient(180deg,#e8f6f6 0%,transparent 100%)}
+.main-nav a{color:#fff;text-decoration:none;padding:0.5rem 0.8rem;border-radius:8px;font-size:0.95rem;font-weight:500;transition:all .24s ease}
+.main-nav a:hover{background:rgba(255,255,255,0.12);color:var(--accent);backdrop-filter:blur(8px)}
+.menu-toggle{display:none;background:transparent;border:0;font-size:1.25rem;align-items:center;justify-content:center;padding:0.25rem 0.5rem;border-radius:6px;color:#fff}
+
+/* Smooth transitions when CSS variables change */
+.brand, .btn, .member-ig, .announcements li, .member-card{
+   transition: color .6s ease, background-color .6s ease, border-color .6s ease, box-shadow .6s ease;
+}
+
+/* Featured cards section */
+/* sticky header + dynamic glass effect */
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:60;
+    transition:all .32s cubic-bezier(.2,.9,.2,1);
+    will-change:background-color, backdrop-filter;
+}
+.site-header:hover{
+    background-color:rgba(255,255,255,0.12);
+    box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   4. Hero / Intro
+   ========================= */
+.hero{padding:3rem 0;background:transparent}
+
+/* Carousel hero with rotating images */
+.hero.hero-carousel{
+    position:relative;
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    overflow:hidden;
+}
+.carousel-container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:99vw;
+    height:99vh;
+    max-width:100%;
+    max-height:100%;
+    border-radius:0;
+    overflow:hidden;
+    box-shadow:none;
+    z-index:0;
+}
+.carousel-slide{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carouselFade 15s linear infinite
+}
+.carousel-slide:nth-child(1){animation-delay:0s}
+.carousel-slide:nth-child(2){animation-delay:5s}
+.carousel-slide:nth-child(3){animation-delay:10s}
+
+@keyframes carouselFade{
+  0%   {opacity:0}
+  8%   {opacity:1}
+  30%  {opacity:1}
+  38%  {opacity:0}
+  100% {opacity:0}
+}
+
+/* Carousel indicator dots */
+.carousel-dots{
+    position:absolute;
+    bottom:2rem;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:3;
+    display:flex;
+    gap:0.2rem;
+}
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.4);
+    cursor:pointer;
+    transition:background .4s ease, transform .3s ease;
+}
+.dot:hover{
+    background:rgba(255,255,255,0.7);
+    transform:scale(1.2);
+}
+.dot.active{
+    background:#fff;
+    box-shadow:0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Sync dot active state with carousel */
+.dot:nth-child(1){animation:dotActive 15s linear infinite}
+.dot:nth-child(2){animation:dotActive 15s linear infinite;animation-delay:5s}
+.dot:nth-child(3){animation:dotActive 15s linear infinite;animation-delay:10s}
+
+@keyframes dotActive{
+  0%   {background:rgba(255,255,255,0.4)}
+  8%   {background:#fff;box-shadow:0 0 8px rgba(255,255,255,0.6)}cara
+  30%  {background:#fff;box-shadow:0 0 8px rgba(255,255,255,0.6)}
+  38%  {background:rgba(255,255,255,0.4);box-shadow:none}
+  100% {background:rgba(255,255,255,0.4)}
+}
+
+.hero-overlay{
+    position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,10,15,0.6) 0%, rgba(5,10,15,0.45) 40%, rgba(5,10,15,0.55) 100%);pointer-events:none;z-index:1;
+}
+.hero .hero-content{position:relative;z-index:2;text-align:center;padding:2rem}
+.hero h2{font-size:clamp(1.5rem, 4.5vw, 3rem);margin:0 0 0.6rem;line-height:1.02}
+.hero .brand-inline{color:var(--accent);background:rgba(255,255,255,0.06);padding:0.08rem 0.4rem;border-radius:6px}
+.hero .lead{color:rgba(255,255,255,0.9);font-size:1rem;margin-bottom:1rem}
+.hero-ctas{display:flex;gap:0.6rem;justify-content:center;align-items:center}
+.hero .btn{padding:0.8rem 1.1rem;font-size:1rem;border-radius:10px}
+.hero .btn.small{background:transparent;border:1px solid rgba(255,255,255,0.14);color:#fff}
+
+/* entrance animation */
+.hero-content{opacity:0;transform:translateY(8px);animation:fadeUp .8s ease .12s forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+@media (max-width:800px){
+  .hero.hero-carousel{min-height:70vh;padding-top:1.2rem;padding-bottom:1.2rem}
+  .hero .hero-content{padding:1rem}
+  .hero .btn{padding:0.6rem 0.9rem}
+  .hero .lead{font-size:0.95rem}
+  .carousel-dots{bottom:1.2rem;gap:0.4rem}
+  .dot{width:10px;height:10px}
+}
+
+/* Theme hue cycle applied to the main wrapper (CSS-only, no JS) */
+.site-wrapper{
+      /* The animation modifies the custom property --h over time */
+      animation: hueCycle 21s linear infinite;
+      will-change: background, color;
+}
+
+@keyframes hueCycle{
+      0%   { --h: 178; }
+      14%  { --h: 207; }
+      28%  { --h: 285; }
+      42%  { --h: 330; }
+      56%  { --h: 20; }
+      70%  { --h: 45; }
+      84%  { --h: 120; }
+      100% { --h: 178; }
+}
+
+@keyframes gradientMove {
+   0% { background-position: 0% 50%; }
+   50% { background-position: 100% 50%; }
+   100% { background-position: 0% 50%; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+   body { animation: none; }
+   .site-wrapper { animation: none; }
+   .member-card, .member-card:hover { transition: none; transform: none; box-shadow: none; }
+}
+
+/* Pause the animation when the checkbox is unchecked (user-controlled) */
+/* The checkbox lives in the header and is a sibling of .site-wrapper */
+#themeSwitch:checked ~ .site-wrapper{ animation-play-state: running; }
+#themeSwitch:not(:checked) ~ .site-wrapper{ animation-play-state: paused; }
+
+/* Style the checkbox (visually hidden but accessible) and its label */
+.theme-switch{ position: absolute; left: -9999px; }
+.theme-label{ cursor: pointer }
 .hero .lead{color:var(--muted);margin:0.5rem 0 1rem}
+
+/* =========================
+   5. Buttons & Controls
+   ========================= */
 .btn{display:inline-block;background:var(--accent);color:#fff;padding:0.6rem 1rem;border-radius:8px;text-decoration:none}
 .btn.small{padding:0.4rem 0.6rem;font-size:0.9rem}
+
+/* =========================
+   6. Sections & Content
+   ========================= */
 .section{padding:1.25rem 0}
 .announcements{list-style:none;padding:0;margin:0 0 1rem}
 .announcements li{background:var(--card);padding:0.75rem;border-radius:8px;margin-bottom:0.5rem;border:1px solid #eef4f3}
 .schedule{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden}
 .schedule th,.schedule td{padding:0.6rem 0.8rem;text-align:left;border-bottom:1px solid #f1f6f6}
+
+/* Make each table row look like a card on larger displays (subtle outline) */
+.schedule tbody tr{border:1px solid rgba(0,0,0,0.04);}
+
+/* Responsive: convert table rows into vertical cards on small screens */
+@media (max-width:800px){
+   .table-wrap{padding:0}
+   .schedule, .schedule thead, .schedule tbody, .schedule th, .schedule td, .schedule tr{display:block;width:100%}
+   .schedule thead{display:none}
+   .schedule tbody tr{display:block;background:var(--card);margin:0 0 0.9rem;padding:0.6rem;border-radius:10px;border:1px solid rgba(0,255,218,0.06);box-shadow:0 8px 18px rgba(10,12,22,0.04)}
+   .schedule td{display:inline-block;margin:0.18rem 0.28rem;padding:0.35rem 0.6rem;border-radius:8px;background:transparent;border:none;font-size:0.78rem}
+   .schedule td:first-child{display:block;font-weight:700;font-size:0.95rem;margin-bottom:0.5rem}
+   .schedule td:not(:first-child){background:rgba(0,0,0,0.03);color:var(--muted);min-width:40px;text-align:center}
+}
+
+/* Slightly tighten spacing for very small phones */
+@media (max-width:420px){
+   .schedule td{font-size:0.72rem;padding:0.28rem 0.45rem}
+   .schedule td:first-child{font-size:0.9rem}
+}
+
+/* =========================
+   7. Members Grid / Cards
+   ========================= */
 .members-grid{display:grid;gap:1rem;padding:0;list-style:none;align-items:start;grid-auto-rows: auto}
 /* default: mobile - 2 columns */
 .members-grid{grid-template-columns:repeat(2,1fr)}
@@ -42,7 +265,24 @@ body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica
     /* wide screens - 6 columns */
     .members-grid{grid-template-columns:repeat(6,1fr)}
 }
-.member-card{background:var(--card);padding:0.5rem;border-radius:10px;border:1px solid #eef4f3;text-align:center;box-shadow:0 6px 18px rgba(20,20,20,0.04)}
+.member-card{background:var(--card);padding:1rem;border-radius:10px;border:1px solid #00ffd5;text-align:center;box-shadow:0 10px 20px rgba(20,20,20,0.04);
+   will-change: transform, box-shadow;
+   transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, border-color .28s ease;
+}
+
+/* Futuristic cyan lift + glow on hover */
+.member-card:hover{
+   transform: translateY(-10px) scale(1.02);
+   box-shadow: 0 18px 40px rgba(0,0,0,0.18), 0 0 28px rgba(0,255,218,0.12);
+   border-color: rgba(0,255,218,0.22);
+}
+
+/* Make keyboard users see a similar effect when focused */
+.member-card:focus-within, .member-card:focus{
+   outline: none;
+   transform: translateY(-6px) scale(1.01);
+   box-shadow: 0 14px 34px rgba(0,0,0,0.14), 0 0 20px rgba(0,255,218,0.1);
+}
 .members-section .members-grid-wrapper{display:flex;flex-direction:column;align-items:center;gap:1rem}
 .member-card.wali{width:auto}
 /* avatar sizes: members larger, wali slightly bigger */
@@ -51,29 +291,20 @@ body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica
 .photo-label{font-size:0.9rem;color:var(--muted);opacity:0.9}
 .member-name{margin-top:0.6rem;font-weight:600;font-size:0.95rem}
 .member-role{margin-top:0.2rem;color:var(--muted);font-size:0.85rem}
-.site-footer{padding:1rem 0;text-align:center;color:var(--muted);font-size:0.95rem}
-
-/* sticky header + hide on scroll */
-.site-header{
-    position:sticky;
-    top:0;
-    z-index:60;
-    transition:transform .28s ease, box-shadow .28s ease;
-    will-change:transform;
-}
-.site-header.hide{transform:translateY(-110%);box-shadow:none}
-.site-header:not(.hide){box-shadow:0 4px 18px rgba(20,20,20,0.06)}
 
 /* member instagram link */
 .member-ig{display:inline-block;margin-top:0.45rem;color:var(--accent);text-decoration:none;font-size:0.9rem}
 .member-ig:hover{text-decoration:underline}
 
+/* =========================
+   8. Responsive / Mobile
+   ========================= */
 .nav-toggle{display:none}
 @media (max-width:800px){
-    .menu-toggle{display:inline-flex;font-size:1.3rem}
+    .menu-toggle{display:inline-flex;font-size:1.3rem;color:#fff}
     .header-inner{position:relative}
-    .main-nav{display:none;position:absolute;right:1rem;top:64px;flex-direction:column;background:var(--card);padding:0.5rem;border-radius:8px;box-shadow:0 10px 30px rgba(20,20,20,0.08);min-width:180px}
-    .main-nav a{padding:0.85rem 1rem;font-size:1rem}
+    .main-nav{display:none;position:absolute;right:1rem;top:64px;flex-direction:column;background:rgba(255,255,255,0.08);padding:0.5rem;border-radius:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);min-width:180px}
+    .main-nav a{padding:0.85rem 1rem;font-size:1rem;color:#fff}
     .nav-toggle:checked + .menu-toggle + .main-nav{display:flex}
 }
 
@@ -87,7 +318,9 @@ button, .btn, .menu-toggle, .main-nav a{touch-action:manipulation}
 .menu-toggle{min-width:44px;min-height:44px}
 .main-nav a{border-radius:6px}
 
-/* small utilities */
+/* =========================
+   9. Utilities & Typography
+   ========================= */
 .text-center{text-align:center}
 
 /* Center headings and suitable section text while keeping lists/tables left-aligned */

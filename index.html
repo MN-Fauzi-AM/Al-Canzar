@@ -10,6 +10,8 @@
     <header class="site-header">
         <div class="container header-inner">
             <h1 class="brand">Kelas X13</h1>
+            <input type="checkbox" id="themeSwitch" class="theme-switch" checked aria-label="Toggle tema dinamis">
+            <label for="themeSwitch" class="btn small theme-label" title="Toggle tema dinamis">Tema</label>
             <input type="checkbox" id="navToggle" class="nav-toggle" aria-hidden="true">
             <label for="navToggle" class="menu-toggle" aria-hidden="true">☰</label>
             <nav id="mainNav" class="main-nav">
@@ -22,12 +24,27 @@
         </div>
     </header>
 
+    <div class="site-wrapper">
     <main>
-        <section id="home" class="hero">
-            <div class="container">
-                <h2>Selamat datang, Kelas X13</h2>
-                <p class="lead">Tempat pengumuman, jadwal, dan sumber belajar untuk siswa kelas X13.</p>
-                <a class="btn" href="#announcements">Lihat Pengumuman</a>
+        <section id="home" class="hero hero-carousel">
+            <div class="carousel-container">
+                <img src="foto-foto/siswa-1.jpg" alt="Featured 1" class="carousel-slide">
+                <img src="foto-foto/one-piece-character-3840x2160-15328.jpeg" alt="Featured 2" class="carousel-slide">
+                <img src="foto-foto/nihilist-penguin-3840x2160-25229.jpg" alt="Featured 3" class="carousel-slide">
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="hero-overlay" aria-hidden="true"></div>
+            <div class="container hero-content">
+                <h2>Selamat datang, <span class="brand-inline">Kelas X13</span></h2>
+                <p class="lead">Pengumuman, jadwal, dan sumber belajar—semua di satu tempat.</p>
+                <div class="hero-ctas">
+                    <a class="btn" href="#announcements">Lihat Pengumuman</a>
+                    <a class="btn small" href="#members">Lihat Anggota</a>
+                </div>
             </div>
         </section>
 
@@ -37,8 +54,7 @@
                 <li><strong>Syukuran Kelas</strong> — Jumat, 20 Februari 2026. Tempat: Aula sekolah.</li>
                 <li><strong>Tugas Matematika</strong> — Kumpulkan sebelum Senin.</li>
             </ul>
-            <p class="muted">Untuk menambah pengumuman secara permanen, gunakan editor halaman atau backend. Contoh pengumuman statis disediakan di atas.</p>
-        </section>
+            </section>
 
         <section id="schedule" class="container section">
             <h3>Jadwal Pelajaran</h3>
@@ -141,7 +157,6 @@
                     </tbody>
                 </table>
             </div>
-            <p class="muted">Catatan: singkatan mata pelajaran sesuai data masukan.</p>
         </section>
 
         <section id="members" class="container section members-section">
@@ -149,7 +164,7 @@
             <div class="members-grid-wrapper">
                 <!-- Wali (centered, larger) -->
                 <div class="member-card wali">
-                    <div class="avatar" style="background-image:url('avatars/wali.jpg')" aria-hidden="true">
+                    <div class="avatar" style="background-image:url('/foto-foto/wali-kel.jpg')" aria-hidden="true">
                         <span class="photo-label">3x4</span>
                     </div>
                     <div class="member-name">Ibu Melly Mahmudah</div>
@@ -160,43 +175,43 @@
                 <div class="members-grid">
                     <!-- Generate 36 member cards with IG links (replace usernames as needed) -->
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member01.jpg')"><span class="photo-label">3x4</span></div>
-                        <div class="member-name">Siswa 1</div>
-                        <div class="member-role">Siswa</div>
-                        <a class="member-ig" href="https://instagram.com/member01" target="_blank" rel="noopener">@member01</a>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-1.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="member-name">Iwan</div>
+                        <div class="member-role">ade chrisna setiawan</div>
+                        <a class="member-ig" href="https://instagram.com/saya_iwaan" target="_blank" rel="noopener">@saya_iwaan</a>
                     </div>
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member02.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-2.jpg')"><span class="photo-label">3x4</span></div>
                         <div class="member-name">Siswa 2</div>
                         <div class="member-role">Siswa</div>
                         <a class="member-ig" href="https://instagram.com/member02" target="_blank" rel="noopener">@member02</a>
                     </div>
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member03.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-3.jpg')"><span class="photo-label">3x4</span></div>
                         <div class="member-name">Siswa 3</div>
                         <div class="member-role">Siswa</div>
                         <a class="member-ig" href="https://instagram.com/member03" target="_blank" rel="noopener">@member03</a>
                     </div>
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member04.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-4.jpg')"><span class="photo-label">3x4</span></div>
                         <div class="member-name">Siswa 4</div>
                         <div class="member-role">Siswa</div>
                         <a class="member-ig" href="https://instagram.com/member04" target="_blank" rel="noopener">@member04</a>
                     </div>
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member05.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-5.jpg')"><span class="photo-label">3x4</span></div>
                         <div class="member-name">Siswa 5</div>
                         <div class="member-role">Siswa</div>
                         <a class="member-ig" href="https://instagram.com/member05" target="_blank" rel="noopener">@member05</a>
                     </div>
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member06.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-6.jpg')"><span class="photo-label">3x4</span></div>
                         <div class="member-name">Siswa 6</div>
                         <div class="member-role">Siswa</div>
                         <a class="member-ig" href="https://instagram.com/member06" target="_blank" rel="noopener">@member06</a>
                     </div>
                     <div class="member-card">
-                        <div class="avatar" style="background-image:url('avatars/member07.jpg')"><span class="photo-label">3x4</span></div>
+                        <div class="avatar" style="background-image:url('/foto-foto/siswa-7.jpg')"><span class="photo-label">3x4</span></div>
                         <div class="member-name">Siswa 7</div>
                         <div class="member-role">Siswa</div>
                         <a class="member-ig" href="https://instagram.com/member07" target="_blank" rel="noopener">@member07</a>
@@ -377,7 +392,6 @@
                     </div>
                 </div>
             </div>
-            <p class="muted">Ganti gambar pada folder `avatars/` dengan ukuran 3x4 (disarankan 300x400px) untuk setiap anggota.</p>
         </section>
 
         <section id="contact" class="container section">
@@ -392,8 +406,7 @@
             <p>© 2026 Kelas X13 — Dibuat untuk kegiatan belajar.</p>
         </div>
     </footer>
-
-    <script src="script.js" defer></script>
+    </div>
 
 </body>
 </html>
